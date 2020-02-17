@@ -1,5 +1,5 @@
 int val;
-int tempPin = 1;
+int tempPin = A1;
 int bpm = 0;
 unsigned long time;
 void setup() {
@@ -16,7 +16,7 @@ void loop() {
     Serial.print("**");
     Serial.print(val);
     Serial.println("**");
-    if (val > 400 && val < 550){
+    if (val > 669 && val < 700){
       Serial.println(val);
       bpm++;
     }
