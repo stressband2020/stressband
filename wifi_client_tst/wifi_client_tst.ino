@@ -5,13 +5,20 @@
 
 const char* ssid     = "stress_band";
 const char* password = "abcdABCD1234*";
+String data;
+// Change the ip depending on the ip of listening api
+String ip = "35.187.248.66";
+String port = "8080";
+String URL = "http://"+ip+":"+port+"/api/test";
+
+int connection_led = 2;
 
 int i=0;
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // We start by connecting to a WiFi network
-
+  pinMode(connection_led, OUTPUT);
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -39,22 +46,32 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (WiFi.status() == WL_CONNECTED){
-    Serial.println("CONNECTED");
-    HTTPClient http;
-    http.begin("http://35.187.248.66:8080/api/test");
-    http.addHeader("Content-Type", "text/plain");
-    
-    int httpCode = http.POST("HELLO FROM ARDUINO");
-    String payload = http.getString();
-
-    Serial.print(httpCode);
-    Serial.print(":");
-    Serial.println(payload);
-    
+  if(WiFi.status() == WL_CONNECTED) {
+    digitalWrite(connection_led, LOW);
+    if(Serial.available()>=0){
+      data = Serial.readString();
+      if(data != ""){
+        post_request();
+        data = "";
+      }
+    }
   }
   else{
-     Serial.print("NOT CONNECTED:");
-     Serial.println(WiFi.localIP());
-    }
+    Serial.println("NOT CONNECTED");
+    digitalWrite(connection_led, HIGH);
+  }
+}
+
+void post_request(){
+  HTTPClient http;
+  http.begin(URL);
+  http.addHeader("Content-Type", "text/plain");
+
+  int httpCode = http.POST(data);
+  String payload = http.getString();
+
+  Serial.print(httpCode);
+  Serial.print(":");
+  Serial.println(payload);
+
 }
