@@ -1,17 +1,17 @@
 //--------------temp
 int val;
-int tempPin = 1;
+int tempPin = 1; //temp pin
 
 //----------------BPM
 #define USE_ARDUINO_INTERRUPTS true
 #include <PulseSensorPlayground.h>
-const int PulseWirePin = 0;       
+const int PulseWirePin = 0;     //bpm pin  
 const int bpmled = 3;          
 int Threshold = 550;
 PulseSensorPlayground pulseSensor;
 
 //-------------GSR
-const int GSR=A0;
+const int GSR=A0; //gsr pin
 int gsrValue=0;
 int gsr_average=0;
 
@@ -55,5 +55,5 @@ void loop()
       }
    gsr_average = sum/10;
    Serial.println(gsr_average);
-  
+   Serial.println("{gsr:" + String(gsr_average) + ", bpm:" + String(myBPM) + ", temperature:" + String(cel) + "}");
 }
