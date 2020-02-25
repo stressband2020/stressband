@@ -1,17 +1,17 @@
 //--------------temp
 int val;
-int tempPin = 1; //temp pin
+int tempPin = A4; //temp pin
 
 //----------------BPM
 #define USE_ARDUINO_INTERRUPTS true
 #include <PulseSensorPlayground.h>
-const int PulseWirePin = 0;     //bpm pin  
+const int PulseWirePin = A0;     //bpm pin  
 const int bpmled = 3;          
 int Threshold = 550;
 PulseSensorPlayground pulseSensor;
 
 //-------------GSR
-const int GSR=A0; //gsr pin
+const int GSR=A2; //gsr pin
 int gsrValue=0;
 int gsr_average=0;
 
