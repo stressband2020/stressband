@@ -1,11 +1,12 @@
-#include <ESP8266WiFi.h>
+ #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
 const char* ssid     = "stress_band";
 const char* password = "abcdABCD1234*";
 String data;
 // Change the ip depending on the ip of listening api
-String ip = "35.240.235.236";
+
+String ip = "34.87.138.206";
 String port = "8080";
 String URL = "http://"+ip+":"+port+"/api/test";
 
