@@ -10,7 +10,7 @@ int tempPin = 4; //temp pin
 #define USE_ARDUINO_INTERRUPTS true
 #include <PulseSensorPlayground.h>
 const int PulseWirePin = 0;     //bpm pin  
-const int bpmled = 3;          
+const int bpmled = 4;          
 int Threshold = 550;
 PulseSensorPlayground pulseSensor;
 
@@ -23,7 +23,7 @@ int gsr_average=0;
 void setup()
 {
   myserial.begin(9600);
-  Serial.begin(115200);
+  Serial.begin(15200);
   pulseSensor.analogInput(PulseWirePin);   
   pulseSensor.blinkOnPulse(bpmled);    
   pulseSensor.setThreshold(Threshold);
@@ -61,9 +61,9 @@ void loop()
       }
    gsr_average = sum/10;
 //   Serial.println(gsr_average);
-   
-   Serial.println("{'gsr':" + String(gsr_average) + ", 'bpm':" + String(myBPM) + ", 'temperature':" + String(cel) + "}");
-   myserial.print(data);("{'gsr':" + String(gsr_average) + ", 'bpm':" + String(myBPM) + ", 'temperature':" + String(cel) + "}");
+   String dataa = "{'gsr':" + String(gsr_average) + ", 'bpm':" + String(myBPM) + ", 'temperature':" + String(cel) + "}";
+//   Serial.println(String(dataa));
+   myserial.print(String(dataa));
 
-   delay(500);
+   delay(3000);
 }
