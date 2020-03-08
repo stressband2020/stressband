@@ -12,7 +12,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  data = "{'bpm':"+String(c)+"}";
+  data = "{'bpm':"+String(c)+",'temperature':"+c+",'gsr':"+c+"}";
   Serial.println(data);
   myserial.print(data);
   c++;

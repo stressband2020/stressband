@@ -6,7 +6,7 @@ const char* password = "abcdABCD1234*";
 String data;
 // Change the ip depending on the ip of listening api
 
-String ip = "34.87.138.206";
+String ip = "34.87.167.59";
 String port = "8080";
 String URL = "http://"+ip+":"+port+"/api/test";
 

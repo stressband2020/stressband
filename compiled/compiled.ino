@@ -1,3 +1,7 @@
+//comms
+#include <SoftwareSerial.h>
+SoftwareSerial myserial(3, 2); // RX, TX
+
 //--------------temp
 int val;
 int tempPin = 4; //temp pin
@@ -18,7 +22,8 @@ int gsr_average=0;
 
 void setup()
 {
-  Serial.begin(9600);
+  myserial.begin(9600);
+  Serial.begin(115200);
   pulseSensor.analogInput(PulseWirePin);   
   pulseSensor.blinkOnPulse(bpmled);    
   pulseSensor.setThreshold(Threshold);
@@ -57,6 +62,8 @@ void loop()
    gsr_average = sum/10;
 //   Serial.println(gsr_average);
    
-   Serial.println("{gsr:" + String(gsr_average) + ", bpm:" + String(myBPM) + ", temperature:" + String(cel) + "}");
+   Serial.println("{'gsr':" + String(gsr_average) + ", 'bpm':" + String(myBPM) + ", 'temperature':" + String(cel) + "}");
+   myserial.print(data);("{'gsr':" + String(gsr_average) + ", 'bpm':" + String(myBPM) + ", 'temperature':" + String(cel) + "}");
+
    delay(500);
 }
